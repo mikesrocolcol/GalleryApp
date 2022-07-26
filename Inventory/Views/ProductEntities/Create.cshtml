@@ -1,0 +1,55 @@
+﻿@model Inventory.Models.ProductEntities
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<hr />
+<div class="row" style="margin-bottom:5rem;">
+    <div class="row " >
+        <form class="row " asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+          
+            <div class="form-group">
+
+                <label asp-for="FormFile" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="FormFile" class="custom-file-input" type="file" id="formFile"
+                    onchange="document.getElementById('ProductPrev').src=window.URL.createObjectURL(this.files[0])" >
+                   
+                    
+                </div>
+               @* <span asp-validation-for="FormFile" class="text-danger"></span>*@
+                <img class="rounded" id="ProductPrev" src="" alt="productImg" width="350" height="450" 
+                    style="border:1px;margin-top:20px;margin-left:120px; " />
+
+
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div>
+    <a asp-action="Index">Back to List</a>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("Selected").html(fileName);
+
+        });
+    </script>
+    }
